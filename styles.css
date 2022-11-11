@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{
+    margin: 0;
+}
+
+:root{
+    --primary-color: #FF8370;
+    --discord-grey: #444444;
+}
+
+.navigation-bar{
+    width: 100vw;
+    height: 8vh;
+    
+    background: var(--primary-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 1px 1px lightgray;
+}
+
+.navigation-bar p{
+    font-family: 'Lobster', cursive;
+    font-size: 1.75rem;
+
+    font-style: italic;
+    color: white;
+
+    margin-left: 4rem;
+}
+
+.navigation-bar ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 2rem;
+    margin-right: 4rem;
+}
+
+.navigation-bar a{
+    text-decoration: none;
+    color: white;
+
+    font-family: 'Lato', cursive;
+    font-size: 1rem;
+}
