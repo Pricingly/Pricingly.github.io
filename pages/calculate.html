@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pricingly</title>
+        <meta name="description" content="Allow simple and easy calculation of various products.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/styles.css">
+        <link rel="icon" href="/images/Project-Logo/Pricingly-Favicon.png">
+    </head>
+
+    <nav>
+        <div class="navigation-bar">
+            <!-- <img src="/images/Project-Logo/Pricingly-Banner.png" alt="pricingly logo"> -->
+            <p id="company-name">Pricingly</p>
+
+            <ul>
+                <li><a href="/pages/calculate.html">Calculate</a></li>
+                <li><a href="/index.html">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <body>
+        
+        <div class="item-container" id="item-container">
+            <div class="item">
+                
+                <div class="item-input">
+                    <input type="text" id="item-name" placeholder="Item Name">
+                    <input type="number" step="0.01" min="0" id="price" placeholder="Price (Ex. 5.00)">
+                </div>
+                
+                <div class="item-image">
+                    <img alt="item image" src="/images/Icons/image-list/default.png">
+                </div>
+
+                <!-- Note: When the trash can is clicked, run the removeItem function passing itself as the parameter -->
+                <div class="item-icons">
+                    <img class="add-image" id="add-image" alt="add image" src="/images/Icons/add-image.png">
+                    <img onclick="removeItem(document.getElementById(this.id))" class="trash-can" id="remove-item" alt="trash can" src="/images/Icons/trash-can.png">
+                </div>
+            </div>
+
+        <div class="add-item" id="add-item">
+            <img id="add-item-button" alt="add item" src="/images/Icons/add-item.png">
+            <p>Add Item</p>
+        </div>
+        </div>
+
+        <div class="calculate-container">
+            <div class="sales-tax">
+                <p>Optional: </p>
+                <input type="number" step="0.1" min="0" id="sales-tax" placeholder="Sales Tax in Your Area (Ex. 8.5)">
+            </div> 
+
+            <div class="calculate">
+                <p id="total">Total:</p>
+                <p>Item Name (Quantity <span class="quantity"><input type="number" min="0" id="quantity" placeholder="0"></span>) + Sales Tax = $384.23 </p>
+            </div> 
+        </div>
+
+        <div class="pie-chart">
+            <p>Percentage Pie Chart</p>
+        </div>
+
+        <footer>
+                
+                <div class="copyright-info">
+                    <p>Copyright &copy; 2022 By Larry Le</p>
+                </div>
+                
+                <p class="footer-name">Pricingly</p>
+
+                <div class="footer-description">
+
+                    <p class="footer-slogan">Make Product Calculation Easy.</p>
+
+                    <div class="footer-icons">
+                        <img alt="instagram" src="/images/Icons/instagram_white.png">
+                        <img alt="github" src="/images/Icons/github_white.png">
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <ul>
+                        <li><a href="/pages/calculate.html">Calculate</a></li>
+                        <li><a href="/index.html">About Us</a></li>
+                    </ul>
+                </div>
+
+        </footer>
+
+        <script src="/pages/calc.js" async defer></script>
+    </body>
+</html>
