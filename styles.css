@@ -17,6 +17,7 @@ input::placeholder{ /* Default placeholder color */
     --primary-color: #FF8370;
     --super-grey: #F6F6F6;
     --primary-light: #ffa294;
+    --navy-blue: #00009f;
 
     --footer-height: 25vh;
 }
@@ -463,20 +464,22 @@ body{
 
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
-    gap: 0.25rem;
+    gap: 0.5rem;
+    color: rgb(37, 37, 37);
 }
 
 .calculate span > input{
     border: none;
     font-size: 1.25rem;
 
-    padding: 0.25rem 0.25rem;
+    padding: 0.25rem 0.25rem 0.25rem 0rem;
 
     background: #ffd7d1;
     border-radius: 0.5rem;
 
-    max-width: 3vw;
+    max-width: 4vw;
     
     text-align: center;
 }

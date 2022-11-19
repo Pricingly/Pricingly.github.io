@@ -29,8 +29,8 @@
             <div class="item">
                 
                 <div class="item-input">
-                    <input type="text" id="item-name" placeholder="Item Name">
-                    <input type="number" step="0.01" min="0" id="price" placeholder="Price (Ex. 5.00)">
+                    <input type="text" id="item-name-input0" placeholder="Item Name" oninput="updateName(document.getElementById(this.id))">
+                    <input type="number" step="0.01" min="0" id="price" placeholder="Price (Ex. 5.00)" oninput="updatePrice()">
                 </div>
                 
                 <div class="item-image">
@@ -40,7 +40,7 @@
                 <!-- Note: When the trash can is clicked, run the removeItem function passing itself as the parameter -->
                 <div class="item-icons">
                     <img class="add-image" id="add-image" alt="add image" src="/images/Icons/add-image.png">
-                    <img onclick="removeItem(document.getElementById(this.id))" class="trash-can" id="remove-item" alt="trash can" src="/images/Icons/trash-can.png">
+                    <img onclick="removeItem(document.getElementById(this.id))" class="trash-can" id="remove-item0" alt="trash can" src="/images/Icons/trash-can.png">
                 </div>
             </div>
 
@@ -58,7 +58,15 @@
 
             <div class="calculate">
                 <p id="total">Total:</p>
-                <p>Item Name (Quantity <span class="quantity"><input type="number" min="0" id="quantity" placeholder="0"></span>) + Sales Tax = $384.23 </p>
+                
+                <p id="calculation-text">
+                    <span class="item-name" id="item-name0">Item Name</span> 
+                    <span class="quantity-class" id="quantity0"><input type="number" min="0" id="quantity" placeholder="x0" oninput="updatePrice()"></span>
+                    <span id="plus-symbol0">+</span> 
+                    <span id="calc-sales-tax">Sales Tax</span> = 
+                    
+                    $<span id="total-amount">321.24</span></p>
+            
             </div> 
         </div>
 
