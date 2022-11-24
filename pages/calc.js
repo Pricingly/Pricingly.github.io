@@ -27,16 +27,22 @@ let number = 0;
 function cloneItem(num){
     let clone = item[0].cloneNode(true); // Clone the item div
     
-    let trashId = clone.childNodes[7].childNodes[3]; // Get the trash can id
-    let priceId = clone.childNodes[1].childNodes[3]; // Get the price id
+    let trashButton = clone.childNodes[7].childNodes[3]; // Get the trash can id
 
     let priceInput = clone.childNodes[1].childNodes[3];
     let itemNameInput = clone.childNodes[1].childNodes[1];
 
-    trashId.setAttribute("id", "remove-item" + num);
-    priceId.setAttribute("id", "price" + num);    
+    let addImageButton = clone.childNodes[7].childNodes[1];
+    let imageIcon = clone.childNodes[3].childNodes[1];
+
+    // Set default values 
+    addImageButton.setAttribute("id", "add-image" + num);
+    trashButton.setAttribute("id", "remove-item" + num);
+    imageIcon.setAttribute("id", "item-image" + num);
+
     itemNameInput.value = "";
     priceInput.value = "";
+    priceInput.setAttribute("id", "price" + num);    
     itemNameInput.setAttribute("id", "item-name-input" + num);
 
     let itemImage = clone.childNodes[3].childNodes[1];
@@ -58,6 +64,7 @@ function cloneCalculation(num){
     quantityClone.setAttribute("id", "quantity" + num); 
 
     itemNameClone.innerHTML = "Item Name";
+    itemNameClone.style.color = "black";
     quantityClone.childNodes[0].value = "";
 
     calculationText.insertBefore(itemNameClone, salesTax);
@@ -81,13 +88,16 @@ function removeItem(trash){
     }
 
     if (trashCan.length > 1){
-        let itemIndex = (trash.id).match(/\d/g); // \d/ searches for all digits [0-9] while /g searches for all instances of the digit
-        let itemNameCalc = document.getElementById("item-name" + itemIndex);
-        let quantityCalc = document.getElementById("quantity" + itemIndex);
-        let plusSignCalc = document.getElementById("plus-symbol" + itemIndex);
+        let itemIndex = (trash).match(/\d/g); // \d/ searches for all digits [0-9] while /g searches for all instances of the digit
+        let itemNameCalc = document.getElementById("item-name" + itemIndex.join(""));
+        let quantityCalc = document.getElementById("quantity" + itemIndex.join(""));
+        let plusSignCalc = document.getElementById("plus-symbol" + itemIndex.join("")); // use .join() as matches method returns a list
 
-        trash.parentNode.parentNode.remove(); // Remove the item
+        document.getElementById(trash).parentNode.parentNode.remove(); // Remove the item div
         
+        console.log(itemIndex);
+        console.log(itemNameCalc);
+
         itemNameCalc.remove(); // Remove the item name from the calculation div
         quantityCalc.remove(); // Remove the quantity from the calculation div
         plusSignCalc.remove();
@@ -95,11 +105,11 @@ function removeItem(trash){
         updatePrice();
     }
     else{
-        trash.classList.add("angryShakeUp"); // Play animation when the user tries to delete the only item div left
+        document.getElementById(trash).classList.add("angryShakeUp"); // Play animation when the user tries to delete the only item div left
         debounce = true;
 
         setTimeout(() => {
-            trash.classList.remove("angryShakeUp");
+            document.getElementById(trash).classList.remove("angryShakeUp");
             debounce = false;
         }, 800);
     }
@@ -108,14 +118,14 @@ function removeItem(trash){
 }
 
 // This function is meant to run as the user types in the item name input. It will take the item name and apply it to the
-// calculation div
+// calculation div. 
 function updateName(itemId){
 
-    let itemIndex = (itemId.id).match(/\d/g); 
-    let itemNameId = document.getElementById("item-name" + itemIndex);
-    
-    itemNameId.innerHTML = itemId.value;
-    itemNameId.style.color = "var(--navy-blue)";
+    let itemIndex = (itemId).match(/\d/g); 
+    let itemNameId = document.getElementById("item-name" + itemIndex.join(""));
+
+    itemNameId.innerHTML = document.getElementById(itemId).value;
+    itemNameId.style.color = "var(--super-dark-blue)";
 
     if (itemNameId.innerHTML == ""){
         itemNameId.innerHTML = "Item Name";
@@ -124,14 +134,26 @@ function updateName(itemId){
 }
 
 let validPrices = true;
-
 function updatePrice(){
     validPrices = true;
 
-    for (var j = 0; j < item.length; j++){ // Make sure that all prices are filled
+    let calcSalesTax = document.getElementById("sales-tax").value; 
+
+    totalAmount.innerHTML = "$0.00";
+    salesTax.innerHTML = "0% Sales Tax";
+    salesTax.style.color = "black";
+
+    if (calcSalesTax != ""){        
+        salesTax.innerHTML = calcSalesTax + "% Sales Tax";
+
+        salesTax.style.color = "var(--super-dark-blue)";
+    }
+
+    // Make sure that all prices are filled
+    for (var j = 0; j < item.length; j++){
         
         if (item[j].childNodes[1].childNodes[3].value == ""){
-            validPrices = false; // changes to false immediately if one of the elements are empty strings
+            validPrices = false; // changes to false immediately if one of the prices elements are empty strings
             return;
         }
         else{
@@ -153,12 +175,42 @@ function updatePrice(){
                     currentPrice += parseFloat(item[i].childNodes[1].childNodes[3].value).toFixed(2) * allQuantities[i].childNodes[0].value; // * for loop through all these quantity spans
                 }
                 
-                console.log(currentPrice);
-        
-                totalAmount.innerHTML = parseFloat(currentPrice).toFixed(2); // Round to the nearest cent
+                if (document.getElementById("sales-tax").value == ""){
+                    totalAmount.innerHTML = "$" + parseFloat(currentPrice).toFixed(2); // Round to the nearest cent
+                }
+                else{
+                    totalAmount.innerHTML = "$" + (parseFloat(currentPrice) * (1 + (calcSalesTax / 100))).toFixed(2); // Round to the nearest cent
+                }
             }
         }
     }
+}
+
+
+var itemElement = "";
+function openModal(imageId){
+    
+    let dialogModal = document.getElementsByClassName("img-dialog")[0];
+    let itemIndex = (imageId).match(/\d/g); 
+    itemElement = document.getElementById("item-image" + itemIndex.join(""));
+
+    if (typeof dialogModal.showModal !== "function"){
+        window.alert("The dialog API is not supported by this browser. Sorry.");
+    }
+    else{
+        dialogModal.showModal();
+    }
+}
+
+function setImage(image){
+    
+    itemElement.src = image;
+    exitModal();
+}
+
+function exitModal(){
+    let dialogModal = document.getElementsByClassName("img-dialog")[0];
+    dialogModal.close();
 }
 
 // MAINSETUP ================================================================================================================================
@@ -175,4 +227,3 @@ addItemButton.addEventListener("click", () => {
     number++;
     cloneItem(number);
 });
-
