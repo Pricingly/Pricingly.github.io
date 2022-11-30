@@ -1,10 +1,9 @@
 // VARIABLES ================================================================================================================================
 
 const companyName = document.getElementById("company-name");
-const iconChildren = document.getElementsByClassName("icon-child");
 
 const addItemButton = document.getElementById("add-item-button");
-const item = document.getElementsByClassName("item");
+const item = document.getElementById("item");
 const itemContainer = document.getElementById("item-container");
 
 const itemName = document.getElementsByClassName("item-name")[0]; 
@@ -17,16 +16,71 @@ const salesTax = document.getElementById("calc-sales-tax");
 const addItem = document.getElementById("add-item");
 const addImage = document.getElementsByClassName("add-image");
 
+/* 
+
+// Check to see if the item element with ID="item0" was ever deleted (via trash can).
+// If so, then hide item0 when the page is reseted
+if (getCookie("item0") == "item0"){
+    // do nothing
+    item0.classList.remove("content-gone");
+}
+else{
+    let item0 = document.getElementById("item0");
+    item0.classList.add("content-gone");
+}
+
+// Originally give item0 a cookie value
+setCookie("item0", "item0");
+
+*/
+
 // FUNCTIONS ================================================================================================================================
 
-let number = 0;
+function dataSave(){
+    const decodeCookie = decodeURIComponent(document.cookie); // Decode cookie
+    const cookieArray = decodeCookie.split("; "); // Split cookie into an array (look how document.cookie is formatted)
+
+    const itemArray = []; // Array to store all the item divs
+
+    for (let i = 0; i < cookieArray.length; i++){
+        if (cookieArray[i].includes("item")){
+            let itemValue = getCookie(cookieArray[i]);
+            let itemIndex = itemValue.match(/\d/g).join(""); // Get the index of the item div
+            
+            itemArray.push(itemIndex);
+        }
+    }
+    
+    if (!itemArray.length > 0){
+        return;
+    }
+
+    console.log(cookieArray);
+    console.log(itemArray);
+
+    for (let j = 0; j < itemArray.length; j += 1){
+        cloneItem(itemArray[j]);
+    }
+
+}
+
+dataSave();
+
+let number;
+if (getCookie("number") == undefined){
+    number = -1; // start @ -1 as array indexes start at 0 and we want to be able to loop
+}
+else{
+    number = getCookie("number");
+}
 
 // When cloning, specificly set the id of the trash can for proper deletion
 // Also reset values of user inputs as well as the item image
 // Furthermore, insert new clone before the add-item div
 function cloneItem(num){
-    let clone = item[0].cloneNode(true); // Clone the item div
-    
+    let clone = item.cloneNode(true); // Clone the item div
+    clone.classList.remove("content-gone"); // Remove the content-gone class so that the item div is visible
+
     let trashButton = clone.childNodes[7].childNodes[3]; // Get the trash can id
 
     let priceInput = clone.childNodes[1].childNodes[3];
@@ -35,10 +89,15 @@ function cloneItem(num){
     let addImageButton = clone.childNodes[7].childNodes[1];
     let imageIcon = clone.childNodes[3].childNodes[1];
 
+    clone.classList.remove("content-gone");
+
     // Set default values 
+    clone.setAttribute("id", "item" + num);
     addImageButton.setAttribute("id", "add-image" + num);
     trashButton.setAttribute("id", "remove-item" + num);
     imageIcon.setAttribute("id", "item-image" + num);
+
+    setCookie(clone.id, clone.id);
 
     itemNameInput.value = "";
     priceInput.value = "";
@@ -57,8 +116,6 @@ function cloneCalculation(num){
 
     let itemNameClone = itemName.cloneNode(true);
     itemNameClone.setAttribute("id", "item-name" + num);
-
-    console.log(itemNameClone);
 
     let quantityClone = document.getElementsByClassName("quantity-class")[0].cloneNode(true); // We get the parent node because that styles the input
     quantityClone.setAttribute("id", "quantity" + num); 
@@ -93,6 +150,11 @@ function removeItem(trash){
         let quantityCalc = document.getElementById("quantity" + itemIndex.join(""));
         let plusSignCalc = document.getElementById("plus-symbol" + itemIndex.join("")); // use .join() as matches method returns a list
 
+        // if item0 is deleted, never show it again (item0 is originally hardcoded)
+        if (itemIndex == 0){
+            setCookie("item0", "deleted");
+        }
+
         document.getElementById(trash).parentNode.parentNode.remove(); // Remove the item div
         
         console.log(itemIndex);
@@ -102,6 +164,7 @@ function removeItem(trash){
         quantityCalc.remove(); // Remove the quantity from the calculation div
         plusSignCalc.remove();
 
+        deleteCookie("item" + itemIndex.join("")); // Delete the cookie of the item div
         updatePrice();
     }
     else{
@@ -186,7 +249,6 @@ function updatePrice(){
     }
 }
 
-
 var itemElement = "";
 function openModal(imageId){
     
@@ -213,6 +275,36 @@ function exitModal(){
     dialogModal.close();
 }
 
+function setCookie(cookieId, value){
+    let date = new Date();
+    date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000)); // Next year's date
+
+    let nextYear = date.toUTCString();
+
+    // Create cookie with key, value, and expiration date
+    document.cookie = `${cookieId}=${value}; expires=${nextYear}; path=/`; // Path is set to root directory so that all pages can access the cookie
+}
+
+function getCookie(cookieId){
+    const decodeCookie = decodeURIComponent(document.cookie); // Decode cookie
+    const cookieArray = decodeCookie.split("; "); // Split cookie into an array (look how document.cookie is formatted)
+
+    let cookieValue = null;
+    cookieArray.forEach((cookie) => {
+        if (cookie.includes(cookieId)){
+
+            cookieValue = cookie.split("=")[1]; // Get value of this cookie            
+        }
+    });
+    return cookieValue; 
+    // You cannot break/return out of a forEach loop, so you have to return the value outside of the loop
+    // If you try to do so, forEach will ignore your return statement and continue to loop through the array
+}
+
+function deleteCookie(cookieId){
+    document.cookie = `${cookieId}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
 // MAINSETUP ================================================================================================================================
 
 companyName.addEventListener("click", () => {
@@ -225,5 +317,7 @@ companyName.addEventListener("click", () => {
 // Then give each trashcan clone a working click event listener
 addItemButton.addEventListener("click", () => { 
     number++;
+
+    setCookie("number", number);
     cloneItem(number);
 });
