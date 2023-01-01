@@ -1,0 +1,60 @@
+/* ==================================================================================================================================== */  
+/* Defaults */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --default-react-background: #104557;
+    --primary-color: #FF8370;
+}
+
+/* ==================================================================================================================================== */  
+/* Box Container */
+
+.box-container{
+    min-width: 50vw;
+    min-height: 50vh;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/* ==================================================================================================================================== */  
+/* Navigation */
+
+nav{
+    padding: 0.5vw 5vw;
+
+    background: var(--primary-color);
+
+    display: flex;
+    justify-content: space-between;
+}
+
+nav h1{
+    color: white;
+    font-family: 'Lato', cursive;
+}
+
+nav > ul{
+    gap: 2vw;
+
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav > ul > li{
+    list-style: none;
+}
