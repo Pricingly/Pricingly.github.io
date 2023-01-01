@@ -1,39 +1,23 @@
-// useState allows you to update the state of a component
-// useEffect runs a function when a component is mounted or updated
-// useRef is like useState but does not rerender the DOM and returns an object with a current property 
-import React, { useEffect, useState } from "react";
+import React, {useState, useRef} from 'react'
+import { Route, Routes } from 'react-router-dom';
+import Home from './Home.js'
+import About from './About.js'
+import Calculate from './Calculate.js'
+import Navigation from './app-components/Navigation.js';
 
-import "./app.css";
-import Home from "./app-components/Home";
-
-// You can use return() to return multiple lines
 function App() {
-
-  // useState returns an array with 2 values so we can split its values into 2 variables (object destructuring)
-  const [count, setCount] = useState(0);
-
-  // empty array means run once only even if rerendered
-  useEffect(() => {
-    console.log("App component mounted (rendered)");
-  }, []);
-
-
-  function incrementCounter(){
-    setCount((previous) => {
-      // update count
-      return previous += 1;
-    })
-  }
-
   return (
-  
+    // You're always returning on element, so you can wrap everything in a div or a fragment
     <>
-      <Home />
-      
-      <div className="box-container">
-        <h1>Counter: {count}</h1>
-        <button onClick={incrementCounter}>Increment</button>
-      </div>
+      <Navigation />
+
+      <Routes>
+        {/* Home is the root component (reusable piece of code) */}
+
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/calculate" element={<Calculate />} />
+      </Routes>
 
     </>
     )

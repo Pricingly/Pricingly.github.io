@@ -76,3 +76,8 @@ you
 
 // Import useState hook from React since React does not use normal DOM
 // useState returns an array so we can split its values into 2 variables (object destructuring)
+
+### Installation
+
+npx install create-react-app
+npm i react-router-dom // for routing DOM (React has React Naive as well)

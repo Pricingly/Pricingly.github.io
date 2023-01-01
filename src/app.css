@@ -17,14 +17,6 @@
     --primary-color: #FF8370;
 }
 
-/* ==================================================================================================================================== */  
-/* Box Container */
-
-.box-container{
-    min-width: 50vw;
-    min-height: 50vh;
-}
-
 a{
     text-decoration: none;
     color: white;
@@ -57,4 +49,34 @@ nav > ul{
 
 nav > ul > li{
     list-style: none;
+}
+
+/* ==================================================================================================================================== */  
+/* Title Header */
+
+.title-intro{
+    min-height: 80vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10vw;
+    background-color: var(--primary-color);
+}
+
+.title-intro-headers{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    flex-direction: column;
+}
+
+.title-intro-headers > h1{
+    color: white;
+}
+
+.title-intro > img{
+    max-width: 30vw;
 }
