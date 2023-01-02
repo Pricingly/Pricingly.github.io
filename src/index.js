@@ -12,7 +12,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-const box_container = document.querySelector('.box-container');
-
-console.log(box_container);

@@ -7,7 +7,8 @@
 
 *{
     font-family: 'Poppins', sans-serif;
-
+    box-sizing: border-box;
+    
     margin: 0;
     padding: 0;
 }
@@ -15,11 +16,19 @@
 :root{
     --default-react-background: #104557;
     --primary-color: #FF8370;
+    --greying-color: #a0a0a0;
 }
 
 a{
     text-decoration: none;
     color: white;
+}
+
+body{
+    position: relative;
+    min-height: 100vh;
+
+    padding-bottom: 25vh;
 }
 
 /* ==================================================================================================================================== */  
@@ -51,6 +60,15 @@ nav > ul > li{
     list-style: none;
 }
 
+nav a{
+    transition: 250ms ease-out;
+}
+
+nav a:hover{
+    color: black;
+    transition: 250ms ease-out;
+}
+
 /* ==================================================================================================================================== */  
 /* Title Header */
 
@@ -79,4 +97,176 @@ nav > ul > li{
 
 .title-intro > img{
     max-width: 30vw;
+}
+
+/* ==================================================================================================================================== */  
+/* Main Page Sections */
+
+.sections{    
+    gap: 5vw;
+    outline: 1px solid red;
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+/* ==================================================================================================================================== */  
+/* ABOUT */
+
+.about{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.about-content{
+    margin: 10vh 0vw;
+    display: flex;
+    flex-direction: column;
+
+    gap: 5vh;
+    max-width: 45vw;
+}
+
+.questionnaire{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.questionnaire > h1{
+    font-size: 1.35vw;
+    color: var(--primary-color);
+    font-weight: 100;
+
+    padding: 0vh 0vw 0.5vh 0vw;
+    font-family: 'Lato', Courier, monospace;
+}
+
+.questionnaire > article{
+    border: 0.25vh solid var(--greying-color);
+    border-radius: 0.5vh;
+
+    /* Width is 100% of the parent */
+    width: 100%;
+
+    padding: 3vh 1vw;
+}
+
+/* ==================================================================================================================================== */  
+/* FOOTER */
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--primary-color);
+    min-height: 25vh;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+
+    /* Giving absolute position width padding will make the footer go out of the screen */
+    /* Position absolute doesn’t keep parent’s padding style */
+}
+
+.footer-navigation{
+    display: flex;
+    padding-right: 5vw;
+}
+
+.footer-navigation > ul{
+    list-style-type: none;
+
+    display: flex;
+    gap: 1.25vh;
+    flex-direction: column;
+}
+
+.footer-navigation a{
+    font-size: 2.25vh;
+
+    transition: 250ms ease-out;
+
+}
+
+.footer-navigation a:hover{
+
+    color: black;
+    transition: 250ms ease-out;
+}
+
+.footer-logo{
+    color: white;
+    font-family: 'Lato', cursive;    
+
+    padding-left: 5vw;
+}
+
+.footer-motto{
+    display: flex;
+    flex-direction: column;
+
+    color: white;
+    font-family: 'Lato', cursive;
+}
+
+.footer-motto-img{
+    display: flex;
+    gap: 1vw;
+}
+
+.footer-motto-img > img{
+    max-width: 4vh;
+    transition: 250ms ease-out;
+}
+
+.footer-motto-img > img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    transition: 250ms ease-out;
+}
+
+.copyright > a{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 1vw;
+
+    font-family: 'Lato', Courier, monospace;
+}
+
+/* ==================================================================================================================================== */  
+/* NOT FOUND */
+
+.not-found{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+ 
+    min-height: 80vh;
+}
+
+.not-found-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found-content > h1{
+    font-size: 4vw;
+}
+
+.not-found-content > h2{
+    font-size: 2vw;
+    color: var(--primary-color);
 }
