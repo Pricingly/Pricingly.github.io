@@ -8,13 +8,25 @@ export default function Footer() {
 
     // On page load, add event listeners to the social links 
     useEffect(() => {
-        instagram.current.addEventListener("click", () => {
-            window.open("https://www.instagram.com/larry_larriee/");
-        });
+        const cleanupInstagram = instagram.current;
+        const cleanupGithub = github.current;
 
-        github.current.addEventListener("click", () => {
-            window.open("https://github.com/Larry-Larriee");
-        });
+        const handleInstagram = (event) => {
+            window.open("https://www.instagram.com/larry_larriee/");
+        }
+
+        const handleGithub = (event) => {
+            window.open("https://github.com/Larry-Larriee/");
+        }
+    
+        cleanupInstagram.addEventListener("click", handleInstagram);
+        cleanupGithub.addEventListener("click", handleGithub);
+            
+        // Remove previous event listeners on page unmount (when page renders for the first time)
+        return () =>{
+            cleanupInstagram.removeEventListener("click", handleInstagram);
+            cleanupGithub.removeEventListener("click", handleGithub);
+        }
     }, []);
 
 
@@ -27,8 +39,8 @@ export default function Footer() {
                     <h1>Product Calculatation Reimagined.</h1>
 
                     <div className="footer-motto-img">
-                        <img ref={instagram} alt="github socials" src={GitHub} draggable="false" />
-                        <img ref={github} alt="instagram socials" src={Instagram} draggable="false" />
+                        <img ref={github} alt="github socials" src={GitHub} draggable="false" />
+                        <img ref={instagram} alt="instagram socials" src={Instagram} draggable="false" />
                     </div>    
                 </article>
                 

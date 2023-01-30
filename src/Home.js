@@ -14,7 +14,7 @@ export default function Home(){
 
     useEffect(() => {
         reactSubName.current.addEventListener("click", () => {
-            changeName("For Visual People");
+            changeName("Smile.");
         });
     }, [])
 
@@ -36,17 +36,26 @@ export default function Home(){
                 content: "Pricingly allows you to quickly create items and automatically calculates all these items for you!", 
                 image: ItemExample, 
                 image_description: "Calculate Item Example",
-                reverse: false
+
+                styleBackground: {backgroundColor: "white"},
+                styleFlex: {flexDirection: "row-reverse"}
             }} />
 
+            {/* Note that CSS Literally Styles Objects */}
             <Sections section={{
                 title: "Factor In Everything!", 
                 content: "Have Sales Tax? Are you within a budget? We got you covered.", 
                 image: ItemExample, 
                 image_description: "Calculate Item Example",
-                reverse: true
+
+                styleBackground: {backgroundColor: "#f6f6f6"},
+                styleFlex: {flexDirection: "row"}
             }} />
 
+            <div className="start-calculating">                
+                <h1>Ready To Start Calculating?</h1>
+                <a href="/calculate">Take Me There!</a> 
+            </div>
         </>
     )
 } 

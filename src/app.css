@@ -14,9 +14,9 @@
 }
 
 :root{
-    --default-react-background: #104557;
     --primary-color: #FF8370;
-    --greying-color: #a0a0a0;
+    --secondary-color: #F6F6F6;
+    --growing-grey: #d3d3d3;
 }
 
 a{
@@ -103,14 +103,66 @@ nav a:hover{
 /* Main Page Sections */
 
 .sections{    
-    gap: 5vw;
-    outline: 1px solid red;
+    min-height: 80vh;
 
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
+.sections-content{
+    display: flex;
+    gap: 15vw;
+    justify-content: center;
+    align-items: center;
 
+    max-width: 80vw;
+}
+
+.sections-content > img{
+    max-width: 30vw;
+}
+
+.sections-content h1{
+    font-size: 2.25vw;
+}
+
+.sections-content p{
+    font-size: 1.25vw;
+}
+
+/* ==================================================================================================================================== */  
+/* Main Page Start Calculations */
+
+.start-calculating{
+    min-height: 80vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+    gap: 5vh;
+
+}
+
+.start-calculating > a{
+    color: var(--primary-color);
+    font-size: 1.5vw;
+
+    padding: 1vh 3vw;
+    border-radius: 1vh;
+    border: 0.5vh solid var(--primary-color);
+
+    background: white;
+    transition: 250ms ease;
+}
+
+.start-calculating > a:hover{
+    background: var(--primary-color);
+    color: white;
+    transition: 250ms ease;
+}
 
 /* ==================================================================================================================================== */  
 /* ABOUT */
@@ -149,7 +201,7 @@ nav a:hover{
 }
 
 .questionnaire > article{
-    border: 0.25vh solid var(--greying-color);
+    border: 0.25vh solid var(--growing-grey);
     border-radius: 0.5vh;
 
     /* Width is 100% of the parent */
@@ -269,4 +321,11 @@ nav a:hover{
 .not-found-content > h2{
     font-size: 2vw;
     color: var(--primary-color);
+}
+
+/* ==================================================================================================================================== */
+/* Main Page Start Calculations */
+
+.itemInput{
+    
 }
