@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9e7897a5.css",
+    "main.js": "/static/js/main.55581cc4.js",
+    "static/media/Allen-Wrench-Example.png": "/static/media/Allen-Wrench-Example.853bb26ed652b147fbd2.png",
+    "static/media/instagram_white.png": "/static/media/instagram_white.e55fa8bfad643d606525.png",
+    "static/media/github_white.png": "/static/media/github_white.a7f58de3124042706aac.png",
+    "static/media/Item-Example.png": "/static/media/Item-Example.39871a7a82923124ecc0.png",
+    "index.html": "/index.html",
+    "main.9e7897a5.css.map": "/static/css/main.9e7897a5.css.map",
+    "main.55581cc4.js.map": "/static/js/main.55581cc4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e7897a5.css",
+    "static/js/main.55581cc4.js"
+  ]
+}
